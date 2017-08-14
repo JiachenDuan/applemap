@@ -12,7 +12,7 @@ Project structure:
        -  App.js  // have the router configuration 
        -  Package.json  // has all the dependency and scripts to run the start/build 
 
-I wrote this project from scratch all by myself (NO copy and paste business) sometime during the weekend, it is not perfect, it may have some bugs here and there, just to demonstrate my front end skill.
+I wrote this project sometime during the weekend, it is not perfect, it may have some bugs here and there, just to demonstrate my front end skill.
 
 
         
