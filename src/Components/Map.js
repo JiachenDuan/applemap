@@ -73,10 +73,10 @@ class Map extends Component {
       this.map);
     console.log("loading map")
     let bounds = this.map.getBounds();
-    let left = this.map.getBounds()._southWest.lng //sourWest lng
-    let right = this.map.getBounds()._northEast.lng; //northEast lng
-    let bottom = this.map.getBounds()._southWest.lat; // sourWest lat
-    let top = this.map.getBounds()._northEast.lat; // northWest lat
+    let left = bounds._southWest.lng //sourWest lng
+    let right = bounds._northEast.lng; //northEast lng
+    let bottom = bounds._southWest.lat; // sourWest lat
+    let top = bounds._northEast.lat; // northWest lat
     let url = "http://www.openstreetmap.org/api/0.6/map?bbox=" + left + "," +
       bottom + "," + right + "," + top;
     console.log(url);
