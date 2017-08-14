@@ -10,10 +10,11 @@ I choosed the create-react-app package to boostrap the project. ReactJs framewor
 Project structure: 
 - Applemap
    - Src
-   - Components 
+    - Components 
        -  Map.js   // contains the main logic of map rendering, add layer, event handling
-       -  App.js  // have the router configuration 
-       -  Package.json  // has all the dependency and scripts to run the start/build 
+    -  App.js  // have parent state and update hashHistory
+    -  index.js //setup router 
+    -  Package.json  // has all the dependency and scripts to run the start/build 
 
 Build and run:
 
