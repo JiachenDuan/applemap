@@ -90,7 +90,7 @@ class Map extends Component {
     let right = bounds._northEast.lng; //northEast lng
     let bottom = bounds._southWest.lat; // sourWest lat
     let top = bounds._northEast.lat; // northWest lat
-    let url = "http://www.openstreetmap.org/api/0.6/map?bbox=" + left + "," +
+    let url = "https://www.openstreetmap.org/api/0.6/map?bbox=" + left + "," +
       bottom + "," + right + "," + top;
     console.log(url);
     $.ajax({
