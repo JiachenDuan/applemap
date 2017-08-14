@@ -5,7 +5,7 @@ I choose ReactJs framework to help me on the routing function and also the state
  When zoom or pan the map, URL will change the zoom/lat/lng accordingly.  Change the URL parameters and hit enter, map will change accordingly as well. 
 
 Project structure: 
-Applemap
+- Applemap
    - Src
    - Components 
        -  Map.js   // contains the main logic of map rendering, add layer, event handling
