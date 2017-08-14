@@ -1,6 +1,5 @@
 import React, {Component}from 'react';
 import Projects from './Components/Projects';
-import 'leaflet';
 import Map from './Components/Map';
 import {hashHistory} from 'react-router';
 import './App.css';
