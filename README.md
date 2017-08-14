@@ -12,6 +12,13 @@ Project structure:
        -  App.js  // have the router configuration 
        -  Package.json  // has all the dependency and scripts to run the start/build 
 
+Build and run:
+
+  1. cd applemap
+  2. npm run build 
+  3. npm install -g serve   //skill it if already installed it or similar server 
+  4. serve -s build/
+
 I wrote this project sometime during the weekend, it is not perfect, it may have some bugs here and there, just to demonstrate my front end skill.
 
 
