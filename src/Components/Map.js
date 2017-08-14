@@ -1,4 +1,4 @@
-import React, { Component }from 'react';
+import React, {Component} from 'react';
 import L from 'leaflet'
 import 'leaflet-osm';
 import $ from 'jquery';
@@ -10,67 +10,81 @@ class Map extends Component {
 
   constructor() {
     super();
-    this.state = {
-      map: {},
-    }
+
     this.map = {};
     this.moveendEvent = this.moveendEvent.bind(this);
+    this.mouseupEvent = this.mouseupEvent.bind(this);
+    this.zoomendEvent = this.zoomendEvent.bind(this);
+    this.mouseoutEvent = this.mouseoutEvent.bind(this);
     this.loadmap = this.loadmap.bind(this);
     this.addLayerSuc = this.addLayerSuc.bind(this);
     this.addLayerFail = this.addLayerFail.bind(this);
-  }
-
-  handleSubmit(e) {
-   this.loadmap();
-    e.preventDefault();
+    this.addedLayer = {};
   }
 
   componentDidMount() {
+    console.log("Did mount")
     this.map = L.map('map2');
     this.loadmap();
-    this.map.on('moveend', this.moveendEvent)
+    this.map.on('moveend', this.moveendEvent);
+    this.map.on('mouseup', this.mouseupEvent);
+    this.map.on('zoomend', this.zoomendEvent);
+    this.map.on('mouseout', this.mouseoutEvent);
   }
 
-  addLayerFail() {
-    alert("Two many node in this area, choose an area with less node ")
-  }
 
-  moveendEvent(e) {
-    console.log('< move start')
-      // console.log('center:'+this.map.getCenter())
+  // update sate when any event happens on map
+  mapEventHandler(e) {
     var center = e.target.getCenter();
     var zoom = e.target.getZoom()
+
     console.log("zoom:" + zoom + "lat:" + center.lat + " " + "lng:" + center.lng)
-    this.setState({
-      map: {
+
+    let map = {
         zoom: zoom,
         lat: center.lat,
         lon: center.lng,
       }
-    }, function() {
-      //pass state to paire ent state
-      this.props.addMap(this.state.map)
-    })
-
+      //set parent map state
+    this.props.addMap(map)
   }
 
+  zoomendEvent(e) {
+    console.log("zoom end:")
+    this.mapEventHandler(e);
+  }
+
+  mouseupEvent(e) {
+    console.log("Mouse up:")
+    this.mapEventHandler(e);
+  }
+  mouseoutEvent(e) {
+    console.log("Mouse out:")
+    this.mapEventHandler(e);
+  }
+  moveendEvent(e) {
+    //console.log("move end:")
+    //this.mapEventHandler(e);
+  }
+  //when steate change, reload the map
   componentDidUpdate() {
-    this.refs.lat.value = this.props.map.lat;
-    this.refs.lon.value = this.props.map.lon;
-    this.refs.zoom.value = this.props.map.zoom;
-    console.log("sate update ")
+    this.loadmap()
   }
 
-  addLayerSuc(xml) {
-    new L.OSM.DataLayer(xml).addTo(this.map);
-  }
-
+  //method to load the map and add layer
   loadmap() {
+
     this.map.setView([this.props.map.lat, this.props.map.lon], this.props.map
       .zoom);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(
       this.map);
     console.log("loading map")
+    this.addLayer()
+  }
+  //add layer to map
+  addLayer() {
+    //Get bounding box geo location from map bounds,so the layer
+    // will add to the right place when map is paned
     let bounds = this.map.getBounds();
     let left = bounds._southWest.lng //sourWest lng
     let right = bounds._northEast.lng; //northEast lng
@@ -87,33 +101,36 @@ class Map extends Component {
     });
   }
 
+  //method to handle ajax call success from OSM API
+  addLayerSuc(xml) {
+    //remove previous added layer before add new layer
+    if (this.addedLayer) {
+      this.map.removeLayer(this.addedLayer);
+    }
 
+    //change colors to following features 
+    let styles ={
+      node:{color:'yellow'},
+      way:{color:'red'},
+      area:{color:'green'}
+    }
+    let options = {
+      styles:styles
+    }
+    this.addedLayer = new L.OSM.DataLayer(xml,options);
+    this.addedLayer.addTo(this.map);
+  }
 
+  // method to handle ajax call fail from OSM API
+  addLayerFail() {
+    //for the ease of the assignment, if use zoom or move to area has too
+    //many nodes from OSM API, just show an alert, and no layer will added to the
+    // new area
+    alert("Two many node in this area, choose an area with less node ")
+  }
   render() {
-    return (
-
-      < div >
-      < div id = 'map2'
-      className = 'mymap' > < /div> < h3 > Add project < /h3 >
-      < form onSubmit = {
-        this.handleSubmit.bind(this)
-      } >
-      < div >
-      < label > Zoom < /label> < input type = "text"
-      ref = "zoom" / >
-      < /div>
-
-      < div >
-      < label > lat < /label> < input type = "text"
-      ref = "lat" / >
-      < /div>
-
-      < div >
-      < label > lon < /label> < input type = "text"
-      ref = "lon" / >
-      < /div> < input type = "submit"
-      value = "Submit" / >
-      < /form> < /div >
+    return ( < div id = 'map2'
+      className = 'mymap' > < /div>
     );
   }
 }
