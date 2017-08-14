@@ -1,9 +1,6 @@
-import React, {
-  Component
-}
-from 'react';
+import React, {Component}from 'react';
 import Projects from './Components/Projects';
-
+import 'leaflet';
 import Map from './Components/Map';
 import {hashHistory} from 'react-router';
 import './App.css';
@@ -42,9 +39,7 @@ class App extends Component {
   render() {
     return ( < div className = "App" >
 
-      < Map addMap = {
-        this.handleAddaddMap.bind(this)
-      }
+      < Map addMap = {this.handleAddaddMap.bind(this)}
       map = {
         this.state.map
       }

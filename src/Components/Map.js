@@ -1,5 +1,4 @@
 import React, { Component }from 'react';
-
 import L from 'leaflet'
 import 'leaflet-osm';
 import $ from 'jquery';
