@@ -3,8 +3,9 @@ import React, { Component }from 'react';
 import L from 'leaflet'
 import 'leaflet-osm';
 import $ from 'jquery';
-
+import './leaflet.css'
 import './map.css'
+
 class Map extends Component {
 
 
