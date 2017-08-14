@@ -1,7 +1,7 @@
 {
   "name": "applemap",
   "version": "1.0.0",
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
+  "description": "project for apple map",
   "main": "index.js",
   "dependencies": {
     "axios": "^0.16.2",

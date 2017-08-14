@@ -108,7 +108,7 @@ class Map extends Component {
       this.map.removeLayer(this.addedLayer);
     }
 
-    //change colors to following features 
+    //change colors to following features
     let styles ={
       node:{color:'yellow'},
       way:{color:'red'},
@@ -126,7 +126,7 @@ class Map extends Component {
     //for the ease of the assignment, if use zoom or move to area has too
     //many nodes from OSM API, just show an alert, and no layer will added to the
     // new area
-    alert("Two many node in this area, choose an area with less node ")
+    console.error("Two many node in this area, choose an area with less node ")
   }
   render() {
     return ( < div id = 'map2'
