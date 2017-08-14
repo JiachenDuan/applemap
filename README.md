@@ -16,7 +16,7 @@ Build and run:
 
   1. cd applemap
   2. npm run build 
-  3. npm install -g serve   //skill it if already installed it or similar server 
+  3. npm install -g serve   //skip it if already installed a STATIC server 
   4. serve -s build/
 
 I wrote this project sometime during the weekend, it is not perfect, it may have some bugs here and there, just to demonstrate my front end skill.
