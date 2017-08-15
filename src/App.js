@@ -4,13 +4,13 @@ import {hashHistory} from 'react-router';
 import './App.css';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       map: {
-        zoom: 18,
-        lat: 37.39,
-        lon: -122.03
+        zoom: this.props.params.zoom===undefined?18:this.props.params.zoom,
+        lat: this.props.params.lat===undefined?37.39:this.props.params.lat,
+        lon: this.props.params.lng===undefined?-122.03:this.props.params.lng
       }
     }
   }
